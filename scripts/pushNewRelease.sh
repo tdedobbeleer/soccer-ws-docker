@@ -6,7 +6,7 @@ setup() {
 }
 
 commit() {
-  git add . ../release
+  git add . release
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
 }
 
