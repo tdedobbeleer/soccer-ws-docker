@@ -14,6 +14,12 @@ push() {
   git push --quiet
 }
 
-setup
-commit
-push
+if [ -z "$RELEASE" ]
+ then
+       setup
+       commit
+       push
+ else
+       echo "Variable RELEASE is not set."
+ fi
+
