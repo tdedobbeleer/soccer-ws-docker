@@ -10,10 +10,8 @@ before_script:
   - curl --silent -L "https://github.com/docker/buildx/releases/download/v0.10.0/buildx-v0.10.0.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
   - chmod a+x ~/.docker/cli-plugins/docker-buildx
 script:
-  - echo "Get latest tag."
-  - export RELEASE_NEW=$(curl -sL https://api.github.com/repos/tdedobbeleer/soccer-ws/tags |jq -r ".[].name" | head -n1)
-  - echo "Compare with current release."
-  - ./scripts/getNewRelease.sh
+  - echo "Get latest tag." && export RELEASE_NEW=$(curl -sL https://api.github.com/repos/tdedobbeleer/soccer-ws/tags |jq -r ".[].name" | head -n1)
+  - echo "Compare with current release." && ./scripts/getNewRelease.sh
 deploy:
   on:
     condition: if [ -v $RELEASE ]
