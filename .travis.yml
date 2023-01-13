@@ -8,7 +8,7 @@ addons:
 jobs:
   include:
     - stage: Get latest tag.
-      script: curl -sL https://api.github.com/repos/tdedobbeleer/soccer-ws/tags |jq -r ".[].name" | head -n1 > release.new
+      script: export RELEASE_NEW=$(curl -sL https://api.github.com/repos/tdedobbeleer/soccer-ws/tags |jq -r ".[].name" | head -n1)
     - stage: Compare with current release.
       script: ./scripts/getNewRelease.sh
     - stage: Push release to repo.
