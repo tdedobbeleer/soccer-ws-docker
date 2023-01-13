@@ -11,7 +11,7 @@ commit() {
 }
 
 push() {
-  git push --quiet
+  git push origin HEAD:master --force --quiet
 }
 
 if [ -z "$RELEASE" ]
