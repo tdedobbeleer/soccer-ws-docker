@@ -14,8 +14,6 @@ script:
   - export RELEASE_NEW=$(curl -sL https://api.github.com/repos/tdedobbeleer/soccer-ws/tags |jq -r ".[].name" | head -n1)
   - echo "Compare with current release."
   - ./scripts/getNewRelease.sh
-  - echo "Push release (if present) to repo."
-  - ./scripts/pushNewRelease.sh
 deploy:
   on:
     condition: if [ -v $RELEASE ]
