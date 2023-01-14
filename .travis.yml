@@ -15,5 +15,5 @@ script:
 deploy:
   provider: script
   on:
-    condition: env(RELEASE) =~ /^(?!\s*$).+/
+    condition: "[ -v ${RELEASE} ]"
   script: ./docker_release.sh
