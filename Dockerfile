@@ -1,7 +1,5 @@
 FROM eclipse-temurin:latest
 
-ARG RELEASE=1.0.1
-
 COPY ./soccer-ws.jar /usr/app/soccer-ws.jar
 
 RUN adduser --disabled-login --disabled-password --gecos "" javauser
