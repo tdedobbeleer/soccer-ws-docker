@@ -10,4 +10,5 @@ if [ "$VAR1" = "$VAR2" ]; then
     echo "No new latest tag, doing absolutely nothing."
 else
     export RELEASE=$VAR1
+    echo "New release set to ${RELEASE}"
 fi
