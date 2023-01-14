@@ -11,7 +11,7 @@ before_script:
   - chmod a+x ~/.docker/cli-plugins/docker-buildx
 script:
   - echo "Get latest tag." && export RELEASE_NEW=$(curl -sL https://api.github.com/repos/tdedobbeleer/soccer-ws/tags |jq -r ".[].name" | head -n1)
-  - echo "Compare with current release." && ./scripts/getNewRelease.sh
+  - echo "Compare with current release." && ./scripts/check_new_release.sh
 deploy:
   on:
     condition: if [ -v $RELEASE ]
