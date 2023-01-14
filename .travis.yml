@@ -1,4 +1,8 @@
 language: bash
+env:
+  global:
+    - RELEASE_NEW=$( curl -sL "https://api.github.com/repos/tdedobbeleer/soccer-ws/tags" | jq -r ".[].name" | head -n1 )
+    - RELEASE=$( curl -sL "https://hub.docker.com/v2/repositories/${DOCKER_USER}/soccer-ws/tags/?page_size=1000" | jq '.results | .[] | .name' -r | sed 's/latest//' | sort --version-sort | tail -n 1 | awk -F '_' '{print $1}')
 services:
   - docker
 addons:

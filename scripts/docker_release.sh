@@ -2,7 +2,7 @@
 
 echo "Pushing docker image version ${RELEASE}_${TRAVIS_BUILD_NUMBER} and tagging latest"
 #Get the latest .jar
-curl https://github.com/tdedobbeleer/soccer-ws/releases/download/$RELEASE/ws-$RELEASE.jar --output soccer-ws.jar
+curl -sL https://github.com/tdedobbeleer/soccer-ws/releases/download/$RELEASE/ws-$RELEASE.jar --output soccer-ws.jar
 
 #Login
 echo "${DOCKER_PASSWORD}" | docker login --username $DOCKER_USER --password-stdin
