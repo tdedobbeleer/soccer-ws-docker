@@ -9,10 +9,6 @@ install:
   - mkdir -vp ~/.docker/cli-plugins/
   - curl --silent -L "https://github.com/docker/buildx/releases/download/v0.10.0/buildx-v0.10.0.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
   - chmod a+x ~/.docker/cli-plugins/docker-buildx
-script:
-  - echo "Get latest tag." && export RELEASE_NEW=$(curl -sL https://api.github.com/repos/tdedobbeleer/soccer-ws/tags |jq -r ".[].name" | head -n1)
-  - echo "Compare with current release." && ./scripts/check_new_release.sh
-deploy:
-  provider: script
-  script: ./docker_release.sh
-  skip_cleanup: true
+script: ./check_new_release.sh
+after_success:
+  - ./docker_release.sh
