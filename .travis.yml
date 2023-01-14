@@ -15,7 +15,7 @@ script:
 deploy:
   provider: script
   on:
-    condition: if [ -v $RELEASE ]
+    condition: env(RELEASE) is present
   script: >
     curl https://github.com/tdedobbeleer/soccer-ws/releases/download/$RELEASE/ws-$RELEASE.jar --output soccer-ws.jar &&
     echo "${DOCKER_PASSWORD}" | docker login --username $DOCKER_USER --password-stdin  &&
