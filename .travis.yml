@@ -12,10 +12,9 @@ before_script:
 script:
   - echo "Get latest tag." && export RELEASE_NEW=$(curl -sL https://api.github.com/repos/tdedobbeleer/soccer-ws/tags |jq -r ".[].name" | head -n1)
   - echo "Compare with current release." && ./scripts/check_new_release.sh
-deploy:
+travis_run_after_script:
   on:
     condition: if [ -v $RELEASE ]
-  provider: script
   script: >
     curl https://github.com/tdedobbeleer/soccer-ws/releases/download/$RELEASE/ws-$RELEASE.jar --output soccer-ws.jar &&
     echo "${DOCKER_PASSWORD}" | docker login --username $DOCKER_USER --password-stdin  &&
