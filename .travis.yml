@@ -2,7 +2,6 @@ language: bash
 env:
   global:
     - TAG=$( curl -sL "https://api.github.com/repos/tdedobbeleer/soccer-ws/tags" | jq -r ".[].name" | head -n1 )
-    - RELEASE=$( curl -sL "https://hub.docker.com/v2/repositories/${DOCKER_USER}/soccer-ws/tags/?page_size=1000" | jq '.results | .[] | .name' -r | sed 's/latest//' | sort --version-sort | tail -n 1 | awk -F '_' '{print $1}')
 services:
   - docker
 addons:
@@ -13,6 +12,9 @@ install:
   - mkdir -vp ~/.docker/cli-plugins/
   - curl --silent -L "https://github.com/docker/buildx/releases/download/v0.10.0/buildx-v0.10.0.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
   - chmod a+x ~/.docker/cli-plugins/docker-buildx
-script: ./scripts/check_new_release.sh
-after_success:
-  - ./scripts/docker_release.sh
+
+deploy:
+  provider: script
+  script: ./scripts/docker_release.sh
+  on:
+    branch: master
