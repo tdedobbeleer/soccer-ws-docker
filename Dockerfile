@@ -2,6 +2,8 @@ FROM eclipse-temurin:latest
 
 ARG JAR
 
+ENV JAR=$JAR
+
 COPY ./$JAR /usr/app/$JAR
 
 RUN adduser --disabled-login --disabled-password --gecos "" javauser
