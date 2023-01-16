@@ -2,7 +2,7 @@ FROM eclipse-temurin:latest
 
 ARG JAR
 
-RUN mkdir /use/app 
+RUN mkdir /usr/app 
 RUN echo $JAR > /usr/app/release.info
 
 COPY ./$JAR /usr/app/soccer-ws.jar
