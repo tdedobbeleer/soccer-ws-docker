@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export DOCKER_CLI_EXPERIMENTAL=enabled
 
 build () {
   docker buildx build --build-arg JAR="${JAR}" --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag "${DOCKER_USER}/soccer-ws:${1}" .
@@ -15,7 +16,8 @@ curl -sL https://github.com/tdedobbeleer/soccer-ws/releases/download/$TAG/ws-$TA
 echo "${DOCKER_PASSWORD}" | docker login --username $DOCKER_USER --password-stdin
 
 #Build for all archs
-docker buildx create --use
+docker context create buildx-build
+docker buildx create --use buildx-build
 
 build "latest"
 build "${TAG}"
