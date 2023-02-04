@@ -24,14 +24,4 @@ build "${TAG}"
 build "${TAG}_${CIRCLE_BUILD_NUM}"
 
 echo "Checking whether release was successfully pushed"
-RELEASE=$( curl -sL "https://hub.docker.com/v2/repositories/${DOCKER_USER}/soccer-ws/tags/?page_size=1000" | jq '.results | .[] | .name' -r | sed 's/latest//' | sort --version-sort | tail -n 1)
-
-echo "Latest release according to repo is ${RELEASE}"
-
-if [ "${RELEASE}" = "${TAG}_${CIRCLE_BUILD_NUM}" ];
-then
-    exit 0;
-else
-    echo "Build failed, release not found on Docker hub.";
-    exit 1;
-fi
+curl --fail -sL "https://hub.docker.com/v2/repositories/${DOCKER_USER}/soccer-ws/tags/${TAG}_${CIRCLE_BUILD_NUM}"
