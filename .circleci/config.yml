@@ -17,6 +17,8 @@ jobs:
     docker:
       - image: cimg/base:2023.02
     steps:
+      - setup_remote_docker:
+          version: 20.10.22
       - checkout
       - run:
           name: install-docker-buildx
