@@ -17,12 +17,12 @@ docker buildx create --use
 
 build "latest"
 build "${TAG}"
-build "${TAG}_${TRAVIS_BUILD_NUMBER}"
+build "${TAG}_${CIRCLE_BUILD_NUM}"
 
 echo "Checking whether release was successfully pushed"
 RELEASE=$( curl -sL "https://hub.docker.com/v2/repositories/${DOCKER_USER}/soccer-ws/tags/?page_size=1000" | jq '.results | .[] | .name' -r | sed 's/latest//' | sort --version-sort | tail -n 1)
 
-if [ "${RELEASE}" = "${TAG}_${TRAVIS_BUILD_NUMBER}" ]; 
+if [ "${RELEASE}" = "${TAG}_${CIRCLE_BUILD_NUM}" ];
 then
     exit 0;
 else
