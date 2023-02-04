@@ -18,7 +18,10 @@ jobs:
       - image: cimg/base:2023.02
     steps:
       - setup_remote_docker:
-          version: 20.10.22
+          version: 20.10.14
+      - run:
+          name: install-jq
+          command: apt install jq
       - checkout
       - run:
           name: install-docker-buildx
