@@ -23,6 +23,8 @@ build "latest"
 build "${TAG}"
 build "${TAG}_${CIRCLE_BUILD_NUM}"
 
+echo "Sleeping for 5s"
+sleep 5
 echo "Checking whether release was successfully pushed"
 RELEASE=$( curl -sL "https://hub.docker.com/v2/repositories/${DOCKER_USER}/soccer-ws/tags/?page_size=1000" | jq '.results | .[] | .name' -r | sed 's/latest//' | sort --version-sort | tail -n 1)
 
