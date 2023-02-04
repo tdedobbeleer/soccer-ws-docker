@@ -21,7 +21,7 @@ jobs:
           version: 20.10.14
       - run:
           name: install-jq
-          command: apt install jq
+          command: sudo apt install jq
       - checkout
       - run:
           name: install-docker-buildx
