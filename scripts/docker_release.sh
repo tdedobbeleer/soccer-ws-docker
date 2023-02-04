@@ -4,6 +4,8 @@ build () {
   docker buildx build --build-arg JAR="${JAR}" --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag "${DOCKER_USER}/soccer-ws:${1}" .
 }
 
+TAG=$( curl -sL "https://api.github.com/repos/tdedobbeleer/soccer-ws/tags" | jq -r ".[].name" | head -n1 )
+
 echo "Pushing docker image version ${TAG}_${TRAVIS_BUILD_NUMBER} and tagging latest"
 #Get the latest .jar
 JAR="soccer-ws-${TAG}.jar"

@@ -31,6 +31,4 @@ jobs:
             chmod a+x ~/.docker/cli-plugins/docker-buildx
       - run:
           name: docker-deploy
-          environment:
-            TAG: $( curl -sL "https://api.github.com/repos/tdedobbeleer/soccer-ws/tags" | jq -r ".[].name" | head -n1 )
           command: sh ./scripts/docker_release.sh
