@@ -6,8 +6,9 @@ build () {
 }
 
 TAG=$( curl -sL "https://api.github.com/repos/tdedobbeleer/soccer-ws/tags" | jq -r ".[].name" | head -n1 )
+DATE=$( date +%s )
 
-echo "Pushing docker image version ${TAG}_${CIRCLE_BUILD_NUM} and tagging latest"
+echo "Pushing docker image version ${TAG}_${DATE} and tagging latest"
 #Get the latest .jar
 JAR="soccer-ws-${TAG}.jar"
 curl -sL https://github.com/tdedobbeleer/soccer-ws/releases/download/$TAG/ws-$TAG.jar --output $JAR
@@ -21,7 +22,7 @@ docker buildx create --use buildx-build
 
 build "latest"
 build "${TAG}"
-build "${TAG}_${CIRCLE_BUILD_NUM}"
+build "${TAG}_${DATE}"
 
 echo "Checking whether release was successfully pushed"
-curl --fail -sL "https://hub.docker.com/v2/repositories/${DOCKER_USER}/soccer-ws/tags/${TAG}_${CIRCLE_BUILD_NUM}"
+curl --fail -sL "https://hub.docker.com/v2/repositories/${DOCKER_USER}/soccer-ws/tags/${TAG}_${DATE}"

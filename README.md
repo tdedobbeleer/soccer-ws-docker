@@ -8,7 +8,7 @@ Using docker buildx to generate image for multiple platforms.
 
 Tags:
 - latest
-- $VERSION_$BUILDNR (e.g. 1.0.0_36, used for version pinning.)
+- $VERSION_$DATE (e.g. 1.0.0_2562421, used for version pinning.)
 - $VERSION (e.g. 1.0.0, the version of soccer-ws is stable, the image itself can be updated.
 
 Generally speaking, the $VERSION tag is also safe for production. Only latest can contain code changes.
