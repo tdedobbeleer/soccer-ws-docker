@@ -6,7 +6,7 @@ build () {
 }
 
 TAG=$( curl -sL "https://api.github.com/repos/tdedobbeleer/soccer-ws/tags" | jq -r ".[].name" | head -n1 )
-DATE=$( date +%s )
+DATE=$( date '+%y%m%d.%H.%M.%S' )
 
 echo "Pushing docker image version ${TAG}_${DATE} and tagging latest"
 #Get the latest .jar
@@ -24,5 +24,5 @@ build "latest"
 build "${TAG}"
 build "${TAG}_${DATE}"
 
-echo "Checking whether release was successfully pushed"
+echo "Checking whether release ${TAG}_${DATE} was successfully pushed"
 curl --fail -sL "https://hub.docker.com/v2/repositories/${DOCKER_USER}/soccer-ws/tags/${TAG}_${DATE}"
