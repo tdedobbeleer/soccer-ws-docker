@@ -2,9 +2,12 @@
 export DOCKER_CLI_EXPERIMENTAL=enabled
 
 build () {
-  docker buildx build --build-arg JAR="${JAR}" --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag "${DOCKER_USER}/soccer-ws:${1}" .
+  if ! docker buildx build --build-arg JAR="${JAR}" --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag "${DOCKER_USER}/soccer-ws:${1}" .; then
+    echo "Building tag ${1} failed miserably."
+    exit 1
+  fi
 }
-
+  
 TAG=$( curl -sL "https://api.github.com/repos/tdedobbeleer/soccer-ws/tags" | jq -r ".[].name" | head -n1 )
 DATE=$( date '+%y%m%d.%H.%M.%S' )
 
@@ -23,6 +26,3 @@ docker buildx create --use buildx-build
 build "latest"
 build "${TAG}"
 build "${TAG}_${DATE}"
-
-echo "Checking whether release ${TAG}_${DATE} was successfully pushed"
-curl --fail -sL "https://hub.docker.com/v2/repositories/${DOCKER_USER}/soccer-ws/tags/${TAG}_${DATE}"
