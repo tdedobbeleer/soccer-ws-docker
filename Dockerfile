@@ -1,4 +1,4 @@
-FROM eclipse-temurin:latest
+FROM amazoncorretto:latest
 
 ARG JAR
 
