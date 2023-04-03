@@ -2,7 +2,7 @@
 export DOCKER_CLI_EXPERIMENTAL=enabled
 
 build () {
-  if ! docker buildx build --build-arg JAR="${JAR}" --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag "${DOCKER_USER}/soccer-ws:${1}" .; then
+  if ! docker buildx build --build-arg JAR="${JAR}" --push --platform linux/arm64/v8,linux/amd64 --tag "${DOCKER_USER}/soccer-ws:${1}" .; then
     echo "Building tag ${1} failed miserably."
     exit 1
   fi
