@@ -2,6 +2,9 @@ FROM eclipse-temurin:19
 
 ARG JAR
 
+#Prereqs
+RUN apt install net-tools
+
 RUN mkdir /usr/app 
 RUN echo $JAR > /usr/app/release.info
 
