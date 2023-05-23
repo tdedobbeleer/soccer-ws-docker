@@ -3,6 +3,7 @@ FROM eclipse-temurin:19
 ARG JAR
 
 #Prereqs
+RUN apt update
 RUN apt install telnet
 
 RUN mkdir /usr/app 
