@@ -4,7 +4,7 @@ ARG JAR
 
 #Prereqs
 RUN apt update
-RUN apt install telnet
+RUN apt install telnet -y
 
 RUN mkdir /usr/app 
 RUN echo $JAR > /usr/app/release.info
